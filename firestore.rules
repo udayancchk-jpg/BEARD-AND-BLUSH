@@ -1,0 +1,32 @@
+// ===============================================================
+// Assumed Data Model
+// ===============================================================
+//
+// Collection: bookings
+// Document ID: auto-generated
+// Fields:
+//   - fullName: string (required) - Client's full name
+//   - phoneNumber: string (required) - Client's phone number
+//   - email: string (optional) - Client's email
+//   - service: string (required) - Selected service
+//   - date: string (required) - ISO 8601 date string
+//   - timeSlot: string (required) - Selected time slot
+//   - notes: string (optional) - Special requests
+//   - status: string (required) - ['pending', 'confirmed', 'cancelled']
+//   - createdAt: timestamp (required) - Creation time
+//
+// ===============================================================
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+    
+    match /bookings/{bookingId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null && request.auth.token.email == "udayancchk@gmail.com";
+    }
+  }
+}

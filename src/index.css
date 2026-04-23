@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-heading: "Playfair Display", serif;
+    --font-sans: "Poppins", sans-serif;
+    
+    --color-primary: #2C0A2E;
+    --color-primary-foreground: #F8F6F2;
+    
+    --color-secondary: #121212;
+    --color-secondary-foreground: #F8F6F2;
+    
+    --color-accent: #D4AF37;
+    --color-accent-foreground: #121212;
+    
+    --color-background: #2C0A2E;
+    --color-foreground: #F8F6F2;
+    
+    --color-card: #1C071D;
+    --color-card-foreground: #F8F6F2;
+    
+    --color-popover: #1C071D;
+    --color-popover-foreground: #F8F6F2;
+    
+    --color-muted: #1A061C;
+    --color-muted-foreground: #A6788A;
+    
+    --color-border: #2C0A2E;
+    --color-input: #2C0A2E;
+    --color-ring: #D4AF37;
+
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 1rem;
+}
+
+:root {
+    --background: 0 0% 4%;
+    --foreground: 30 25% 93%;
+    --card: 0 0% 8%;
+    --card-foreground: 30 25% 93%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 30 25% 93%;
+    --primary: 348 66% 17%;
+    --primary-foreground: 30 25% 93%;
+    --secondary: 0 0% 4%;
+    --secondary-foreground: 30 25% 93%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 63%;
+    --accent: 40 68% 69%;
+    --accent-foreground: 0 0% 4%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 348 66% 17% / 30%;
+    --input: 348 66% 17% / 30%;
+    --ring: 40 68% 69%;
+    --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold tracking-wider;
+    }
+}
+
+@utility luxury-shadow {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+@utility luxury-glass {
+  @apply bg-[#1C071D]/60 backdrop-blur-xl border border-white/5;
+}
+
+@utility hover-glow {
+  &:hover {
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.1);
+  }
+}
+
+@utility custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 175, 55, 0.3);
+  }
+}
+
+@utility luxury-card {
+  @apply bg-[#1C071D] rounded-2xl border border-white/5 overflow-hidden transition-all duration-700 hover:border-accent/40;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+@utility royal-gradient {
+  background: linear-gradient(135deg, #2C0A2E 0%, #1A061C 100%);
+}
+
+@utility surface-plum {
+  background-color: #2C0A2E;
+  color: #F8F6F2;
+}
+
+@utility surface-black {
+  background-color: #121212;
+  color: #F8F6F2;
+}
+
+@utility surface-gold {
+  background-color: #D4AF37;
+  color: #121212;
+}
+
+@utility editorial-dark {
+  background-color: #121212;
+  color: #F8F6F2;
+}
+
+.dark {
+    /* Keep Alabaster for forced dark mode to ensure visibility during trial */
+    --background: 40 20% 99%;
+    --foreground: 24 6% 16%;
+    --card: 30 15% 95%;
+    --card-foreground: 24 6% 16%;
+    --popover: 30 15% 95%;
+    --popover-foreground: 24 6% 16%;
+    --primary: 40 20% 99%;
+    --primary-foreground: 24 6% 16%;
+    --secondary: 30 15% 95%;
+    --secondary-foreground: 24 6% 16%;
+    --muted: 45 10% 93%;
+    --muted-foreground: 24 4% 40%;
+    --accent: 21 46% 59%;
+    --accent-foreground: 40 20% 99%;
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-foreground;
+    }
+  html {
+    @apply font-sans;
+    }
+}
