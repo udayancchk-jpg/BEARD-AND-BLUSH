@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -53,6 +54,7 @@ const TIME_SLOTS = [
 ];
 
 export default function BookingSystem() {
+  const location = useLocation();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [lastBooking, setLastBooking] = useState<any>(null);
@@ -68,6 +70,25 @@ export default function BookingSystem() {
       timeSlot: "",
     },
   });
+
+  useEffect(() => {
+    const state = location.state as { recommendedService?: string } | null;
+    const recommended = state?.recommendedService?.trim();
+    if (!recommended) return;
+
+    const lower = recommended.toLowerCase();
+    const matched =
+      ALL_SERVICES.find((s) => s.title.toLowerCase() === lower) ||
+      ALL_SERVICES.find(
+        (s) =>
+          s.title.toLowerCase().includes(lower) ||
+          lower.includes(s.title.toLowerCase())
+      );
+
+    if (matched) {
+      form.setValue("service", matched.title);
+    }
+  }, [location.state, form]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
@@ -286,7 +307,7 @@ export default function BookingSystem() {
                                   <Scissors className="h-3 w-3 text-accent" />
                                   <FormLabel className="text-[9px] uppercase tracking-[0.4em] font-bold text-foreground/30">The Ritual</FormLabel>
                                 </div>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <Select onValueChange={field.onChange} value={field.value}>
                                   <FormControl>
                                     <SelectTrigger className="rounded-2xl border border-white/5 bg-[#121212]/40 focus:ring-1 focus:ring-accent/50 focus:border-accent/50 h-16 px-6 text-foreground text-xs font-light transition-all shadow-inner">
                                       <SelectValue placeholder="Selection slot" />

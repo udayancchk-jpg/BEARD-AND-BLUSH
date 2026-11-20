@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
@@ -15,6 +17,19 @@ import { motion } from 'motion/react';
 import { Calendar } from 'lucide-react';
 
 export default function LandingPage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      const timer = setTimeout(() => {
+        const element = document.getElementById(id);
+        element?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [location]);
+
   return (
     <div className="min-h-screen bg-background selection:bg-accent selection:text-accent-foreground relative overflow-hidden">
       <Chatbot />

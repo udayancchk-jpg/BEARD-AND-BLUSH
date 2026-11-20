@@ -1,10 +1,12 @@
 import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { Camera, Upload, Sparkles, Loader2, User, RefreshCw, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { analyzePortrait } from '@/services/geminiService';
 
 export default function VisualArchitect() {
+  const navigate = useNavigate();
   const [image, setImage] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [result, setResult] = useState<any>(null);
@@ -219,11 +221,16 @@ export default function VisualArchitect() {
 
                   {/* CTA Button */}
                   <div className="flex flex-col sm:flex-row gap-4 mt-2">
-                    <Button 
-                      asChild 
-                      className="bg-[#D4AF37] hover:bg-[#C5A028] text-black h-14 px-8 rounded-[10px] text-[16px] font-bold uppercase transition-all flex-1 shadow-lg shadow-accent/10"
+                    <Button
+                      type="button"
+                      onClick={() =>
+                        navigate('/#ultrapremium', {
+                          state: { recommendedService: result?.recommendedService },
+                        })
+                      }
+                      className="bg-[#D4AF37] hover:bg-[#C5A028] text-black h-14 px-8 rounded-[10px] text-[16px] font-bold uppercase transition-all flex-1 shadow-lg shadow-accent/10 cursor-pointer"
                     >
-                      <a href="#ultrapremium">Book This Service</a>
+                      Book This Service
                     </Button>
                     <Button 
                       variant="outline" 
